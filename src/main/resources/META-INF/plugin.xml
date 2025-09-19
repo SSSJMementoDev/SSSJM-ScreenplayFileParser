@@ -1,6 +1,6 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.gettingcn.sssjmscreenplayfileparser</id>
+    <id>cn.monocur.sssjmscreenplayfileparser</id>
     <name>SSSJM-ScreenplayFileParser</name>
     <vendor>gettingcn</vendor>
 
@@ -9,7 +9,7 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.gettingcn.sssjmscreenplayfileparser.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
-        <postStartupActivity implementation="com.github.gettingcn.sssjmscreenplayfileparser.startup.MyProjectActivity" />
+        <projectService serviceInterface="cn.monocur.sssjmscreenplayfileparser.SPFileParserProjectService"
+                 serviceImplementation="cn.monocur.sssjmscreenplayfileparser.SPFileParserProjectService"/>
     </extensions>
 </idea-plugin>
