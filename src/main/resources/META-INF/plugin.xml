@@ -6,10 +6,11 @@
 
     <depends>com.intellij.modules.platform</depends>
 
-    <resource-bundle>messages.MyBundle</resource-bundle>
+    <resource-bundle>messages.SPFileParserBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <projectService serviceInterface="cn.monocur.sssjmscreenplayfileparser.SPFileParserProjectService"
-                 serviceImplementation="cn.monocur.sssjmscreenplayfileparser.SPFileParserProjectService"/>
+        <projectService serviceInterface="cn.monocur.sssjmscreenplayfileparser.services.SPFileParserProjectService"
+                 serviceImplementation="cn.monocur.sssjmscreenplayfileparser.services.SPFileParserProjectService"/>
+        <toolWindow factoryClass="cn.monocur.sssjmscreenplayfileparser.toolWindow.SPFileParserToolWindowFactory" id="ScreenplayFileParser"/>
     </extensions>
 </idea-plugin>
