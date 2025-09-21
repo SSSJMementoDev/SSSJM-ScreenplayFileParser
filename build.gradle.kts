@@ -11,6 +11,7 @@ plugins {
     alias(libs.plugins.kover) // Gradle Kover Plugin
 }
 
+// 注意检查本地环境变量的用户变量中是否有JetBrainsIDEA软件所在路径
 var idePath = System.getenv("IntelliJ IDEA").replace("\\bin", "")
 
 group = providers.gradleProperty("pluginGroup").get()
@@ -38,6 +39,7 @@ dependencies {
 
     // IntelliJ Platform Gradle Plugin Dependencies Extension - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-dependencies-extension.html
     intellijPlatform {
+        // 注意检查本地环境变量的用户变量中是否有JetBrainsIDEA软件所在路径
         local(idePath)
 //        create(providers.gradleProperty("platformType"), providers.gradleProperty("platformVersion"))
 
