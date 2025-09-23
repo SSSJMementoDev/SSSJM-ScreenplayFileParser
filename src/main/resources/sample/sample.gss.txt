@@ -1,0 +1,29 @@
+command:mainParam;
+command : mainParam;
+command:mainParam -subParamKey1=subParamValue1;
+command : mainParam -subParamKey1 = subParamValue1;
+command:mainParam -subParamKey1=subParamValue1 -subParamKey2=subParamValue2 -subParamKey3=subParamValue3;
+command : mainParam -subParamKey1 = subParamValue1 -subParamKey2 = subParamValue2 -subParamKey3 = subParamValue3;
+command:mainParam -subParamKey1;
+command : mainParam -subParamKey1;
+command:mainParam -subParamKey1 -subParamKey2=subParamValue2;
+command : mainParam -subParamKey1 -subParamKey2 = subParamValue2;
+command : mainParam
+    -subParamKey1 = subParamValue1
+    -subParamKey2 = subParamValue2
+    -subParamKey3 = subParamValue3;
+command : mainParam
+    -subParamKey1
+    -subParamKey2 = subParamValue2;
+command:mainParam -option=[->optionTarget]optionContent;
+command : mainParam
+    -option = [->optionTarget]optionContent;
+command :
+    {
+        "testField1":"testValue",
+        "testField1":2
+    };
+command : "mainParam";
+
+// 其中command和subParamKey需要限定为英文字符串
+// mainParam需是除

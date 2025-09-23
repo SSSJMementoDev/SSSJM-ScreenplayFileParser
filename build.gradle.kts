@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.changelog) // Gradle Changelog Plugin
     alias(libs.plugins.qodana) // Gradle Qodana Plugin
     alias(libs.plugins.kover) // Gradle Kover Plugin
+    id("org.jetbrains.grammarkit") version "2022.3.2.2"
 }
 
 // 注意检查本地环境变量的用户变量中是否有JetBrainsIDEA软件所在路径
@@ -138,6 +139,14 @@ tasks {
 
     publishPlugin {
         dependsOn(patchChangelog)
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs("src/main/gen")
+        }
     }
 }
 

@@ -1,0 +1,26 @@
+// 第一层，提取命令
+private static readonly Regex CommandRegex = new Regex(
+	$@"
+			\s*                         # 允许前导空白
+			(?<{COMMAND}>[^\s:]+)       # 命令：非空白非冒号字符（更严格）
+			\s*:\s*						# 冒号分隔符
+			(?<{MAIN_PARAM}>[^;]+?)?		# 主参数：非分号字符（非贪婪）
+			(?:                         # 次级参数组（非捕获分组）
+				\s+                     # 必须空白分隔
+				-                       # 次级参数起始符
+				(?<{SUB_PARAMS}>[^;]+?) # 次级参数：非分号字符
+			)*                          # 0或多个次级参数
+			\s*;                        # 结束符
+			"
+	,
+	RegexOptions.Compiled | RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace);
+
+// 第二层，解析次要参数，对获得的SUB_PARAMS进行二次处理
+private static readonly Regex SubCommandRegex = new Regex(
+    $@"^(?<{SUB_PARAM_KEY}>\w+)\s*(=\s*(?<{SUB_PARAM_VALUE}>[^//][\s\S]*))*",
+    RegexOptions.Compiled | RegexOptions.Multiline);
+
+// 第三次，在SUB_PARAM_KEY为Option时提取该选项的内容及其要跳转的目标
+private static readonly Regex OptionRegex = new Regex(
+    @$"\[->(?<{OPTION_TARGET}>[^\/:\\*?""<>|\r\n\]]+)\](?<{OPTION_CONTENT}>.*)",
+    RegexOptions.Compiled | RegexOptions.Multiline);

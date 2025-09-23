@@ -9,8 +9,39 @@
     <resource-bundle>messages.SPFileParserBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <projectService serviceInterface="cn.monocur.sssjmscreenplayfileparser.services.SPFileParserProjectService"
-                 serviceImplementation="cn.monocur.sssjmscreenplayfileparser.services.SPFileParserProjectService"/>
-        <toolWindow factoryClass="cn.monocur.sssjmscreenplayfileparser.toolWindow.SPFileParserToolWindowFactory" id="ScreenplayFileParser"/>
+        <projectService
+                serviceInterface="cn.monocur.sssjmscreenplayfileparser.services.SPFileParserProjectService"
+                serviceImplementation="cn.monocur.sssjmscreenplayfileparser.services.SPFileParserProjectService"
+        />
+        <toolWindow
+                factoryClass="cn.monocur.sssjmscreenplayfileparser.toolWindow.SPFileParserToolWindowFactory"
+                id="ScreenplayFileParser"
+        />
+        <fileType
+                name="GettingScreenplayScript"
+                language="GettingScreenplayScript"
+                implementationClass="cn.monocur.sssjmscreenplayfileparser.screenplay.GettingScreenplayScriptFileType"
+                fieldName="INSTANCE"
+                extensions="gss;gss.txt"
+        />      <!-- 在"extensions"定义复合扩展名 -->
+        <syntaxHighlighter
+                key="GettingScreenplayScript"
+                implementationClass="cn.monocur.sssjmscreenplayfileparser.screenplay.GettingScreenplayScriptSyntaxHighlighter"
+        />
+        <lang.syntaxHighlighterFactory
+                language="GettingScreenplayScript"
+                implementationClass="cn.monocur.sssjmscreenplayfileparser.screenplay.GettingScreenplayScriptSyntaxHighlighterFactory"
+        />
+        <annotator
+                language="GettingScreenplayScript"
+                implementationClass="cn.monocur.sssjmscreenplayfileparser.screenplay.GettingScreenplayScriptAnnotator"
+        />
+        <colorSettingsPage
+                implementation="cn.monocur.sssjmscreenplayfileparser.screenplay.GettingScreenplayScriptColorSettingsPage"
+        />
+        <lang.parserDefinition
+                language="GettingScreenplayScript"
+                implementationClass="cn.monocur.sssjmscreenplayfileparser.screenplay.psi.GettingScreenplayScriptParserDefinition"
+        />
     </extensions>
 </idea-plugin>

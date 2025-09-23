@@ -1,0 +1,81 @@
+{
+  parserClass="cn.monocur.sssjmscreenplayfileparser.screenplay.parser.GettingScreenplayScriptParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="GettingScreenplayScript"
+  psiImplClassSuffix="Impl"
+  psiPackage="cn.monocur.sssjmscreenplayfileparser.screenplay.psi"
+  psiImplPackage="cn.monocur.sssjmscreenplayfileparser.screenplay.psi.impl"
+
+  elementTypeHolderClass="cn.monocur.sssjmscreenplayfileparser.screenplay.psi.GettingScreenplayScriptTypes"
+  elementTypeClass="cn.monocur.sssjmscreenplayfileparser.screenplay.psi.GettingScreenplayScriptElementType"
+  tokenTypeClass="cn.monocur.sssjmscreenplayfileparser.screenplay.psi.GettingScreenplayScriptTokenType"
+
+    tokens=[
+        // 分隔符
+        HYPHEN='-'  // 添加连字符 token
+        COLON=':'   // 添加冒号 token
+        EQUALS='='  // 添加等号 token
+        SEMICOLON=';'  // 添加分号 token
+        VAR_PREFIX='$'
+        HASH='#'
+        POINT_TO="->"
+
+        L_CURLY='{'
+        R_CURLY='}'
+        L_BRACKET='['
+        R_BRACKET=']'
+
+        // 双引号字符串，以支持转义
+        STRING="regexp:\"([^\"\\]|\\.)*\""
+        // 字的定义
+        NUMBER='regexp:-?(0|[1-9]\d*)(\.\d+)?([eE][+-]?\d*)?'
+        // 修改为不以数字开头的单词
+        ALPHABET="regexp:[a-zA-Z_][a-zA-Z_0-9]*"
+        // 通用字符
+        WORD="regexp:[^\s:;=\-\"\[\]$#]*"
+
+        // 注解与空白
+        SPACE='regexp:\s+'
+        COMMENT='regexp://.*'
+    ]
+}
+
+screenplay ::= screenplayConfig? command+
+
+command ::= commandName COLON? mainParam? subParams* SEMICOLON
+{
+    pin=1
+    recoverWhile=cmdRecover
+}
+
+private cmdRecover ::= !(SEMICOLON | ALPHABET)
+
+commandName     ::= ALPHABET
+mainParam       ::= (NUMBER | ALPHABET | STRING | WORD)
+subParams       ::= HYPHEN subParamKey [subParamValue]
+subParamKey     ::= ALPHABET
+subParamValue   ::= EQUALS ((NUMBER | ALPHABET | STRING | WORD) | option)
+
+screenplayConfig ::= HASH (ALPHABET | STRING | WORD)? HASH
+{
+    pin=1
+    recoverWhile=screenplayConfig_Recover
+}
+private screenplayConfig_Recover ::= !(HASH | ALPHABET | SEMICOLON)
+
+// [->target]格式
+option ::= optionTarget optionContent
+optionTarget ::= L_BRACKET POINT_TO (ALPHABET | STRING | WORD) R_BRACKET
+{
+    pin=1
+    recoverWhile=optionTarget_Recover
+}
+optionContent ::= (ALPHABET | STRING | WORD)
+private optionTarget_Recover ::= !(L_BRACKET | R_BRACKET | optionContent)
+
+variable ::= L_CURLY VAR_PREFIX ALPHABET R_CURLY
+{
+    pin=VAR_PREFIX
+}

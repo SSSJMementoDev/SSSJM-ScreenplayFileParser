@@ -1,0 +1,20 @@
+commandName:MainParam;
+commandName : MainParam;
+commandName:MainParam -subParamKey1=subParamValue1;
+commandName : MainParam -subParamKey1 = subParamValue1;
+commandName:MainParam -subParamKey1=subParamValue1 -subParamKey2=subParamValue2 -subParamKey3=subParamValue3;
+commandName : MainParam -subParamKey1 = subParamValue1 -subParamKey2 = subParamValue2 -subParamKey3 = subParamValue3;
+commandName:MainParam -subParamKey1;
+commandName : MainParam -subParamKey1;
+commandName:MainParam -subParamKey1 -subParamKey2=subParamValue2;
+commandName : MainParam -subParamKey1 -subParamKey2 = subParamValue2;
+commandName : MainParam
+    -subParamKey1 = subParamValue1
+    -subParamKey2 = subParamValue2
+    -subParamKey3 = subParamValue3;
+commandName : MainParam
+    -subParamKey1
+    -subParamKey2 = subParamValue2;
+commandName:MainParam -option=[target->optionTarget]optionContent;
+commandName : MainParam
+    -option = [target->optionTarget]optionContent;
