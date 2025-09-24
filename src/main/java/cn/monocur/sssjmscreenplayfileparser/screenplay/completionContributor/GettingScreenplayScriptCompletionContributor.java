@@ -49,6 +49,7 @@ public class GettingScreenplayScriptCompletionContributor extends CompletionCont
     // 次要参数
     // 基本参数
     public static final String CONCAT = "concat";
+    public static final String HINDER = "Hinder";
     public static final String NEXT = "next";
     public static final String LEFT = "left";
     public static final String RIGHT = "right";

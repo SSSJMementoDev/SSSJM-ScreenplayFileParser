@@ -140,6 +140,10 @@ tasks {
     publishPlugin {
         dependsOn(patchChangelog)
     }
+
+    buildSearchableOptions {
+        enabled = false
+    }
 }
 
 sourceSets {
