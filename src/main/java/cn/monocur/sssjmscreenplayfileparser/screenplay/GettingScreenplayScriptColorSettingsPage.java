@@ -23,6 +23,7 @@ public class GettingScreenplayScriptColorSettingsPage implements ColorSettingsPa
             new AttributesDescriptor("Options", GettingScreenplayScriptSyntaxHighlighter.OPTION),
             new AttributesDescriptor("Variables", GettingScreenplayScriptSyntaxHighlighter.VARIABLE),
             new AttributesDescriptor("Comments", GettingScreenplayScriptSyntaxHighlighter.COMMENT),
+            new AttributesDescriptor("Common Values", GettingScreenplayScriptSyntaxHighlighter.COMMON_VALUE)
     };
 
     @Nullable
@@ -40,15 +41,41 @@ public class GettingScreenplayScriptColorSettingsPage implements ColorSettingsPa
     @NotNull
     @Override
     public String getDemoText() {
-        return "#screenplayConfig#\n" +
-                "command:mainParam;\n" +
-                "command:123;\n" +
-                "command:\"string\";\n" +
-                "command:汉字;\n" +
-                "command:value -key=value;\n" +
-                "command:value -option=[->target]content;\n" +
-                "${variable}\n" +
-                "// 这是一条注释";
+        return """
+                // 其中command和subParamKey需要限定为英文字符串
+                // Param一类需填入content
+                command:mainParam;
+                command:mainParam -subParamKey1=subParamValue1;
+                command:mainParam -subParamKey1=subParamValue1 -subParamKey2=subParamValue2 -subParamKey3=subParamValue3;
+                command : "mainParam";
+                command : 我说，什么意思！！！;
+                command : "Hello Gays";
+                command : Hi Gays;
+                command : 我日你{$Test};
+                command : 啊对对对{$Test1} -subParamKey={$Test2} -subParamKey={};
+                command:mainParam -option=[->optionTarget]optionContent;
+                command : mainParam
+                    -option = [->optionTarget]optionContent;
+                command :
+                    {
+                        "testField1":"testValue",
+                        "testField1":2
+                    };
+                command : mainParam;
+                command : mainParam -subParamKey1 = subParamValue1;
+                command : mainParam -subParamKey1 = subParamValue1 -subParamKey2 = subParamValue2 -subParamKey3 = subParamValue3;
+                command:mainParam -subParamKey1;
+                command : mainParam -subParamKey1;
+                command:mainParam -subParamKey1 -subParamKey2=subParamValue2;
+                command : mainParam -subParamKey1 -subParamKey2 = subParamValue2;
+                command : mainParam
+                    -subParamKey1 = subParamValue1
+                    -subParamKey2 = subParamValue2
+                    -subParamKey3 = subParamValue3;
+                command : mainParam
+                    -subParamKey1
+                    -subParamKey2 = subParamValue2;
+                """;
     }
 
     @Nullable

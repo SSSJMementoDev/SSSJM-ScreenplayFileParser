@@ -46,7 +46,7 @@ public class GettingScreenplayScriptSyntaxHighlighter extends SyntaxHighlighterB
 
     public static final TextAttributesKey WORD =
             createTextAttributesKey("GETTING_SCREENPLAY.WORD",
-                    DefaultLanguageHighlighterColors.IDENTIFIER);
+                    DefaultLanguageHighlighterColors.NUMBER);
 
     public static final TextAttributesKey CONFIG =
             createTextAttributesKey("GETTING_SCREENPLAY.CONFIG",
@@ -64,10 +64,11 @@ public class GettingScreenplayScriptSyntaxHighlighter extends SyntaxHighlighterB
             createTextAttributesKey("GETTING_SCREENPLAY.COMMENT",
                     DefaultLanguageHighlighterColors.LINE_COMMENT);
 
-    private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<>();
+    public static final TextAttributesKey COMMON_VALUE =
+            createTextAttributesKey("GETTING_SCREENPLAY.COMMON_VALUE",
+                    DefaultLanguageHighlighterColors.KEYWORD);
 
-    // 定义Token类型到TextAttributesKey的映射
-    private static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
+    private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<>();
 
     static {
         // 为每个分隔符 token 单独设置属性
@@ -75,6 +76,7 @@ public class GettingScreenplayScriptSyntaxHighlighter extends SyntaxHighlighterB
         ATTRIBUTES.put(GettingScreenplayScriptTypes.SEMICOLON, SEPARATOR);
         ATTRIBUTES.put(GettingScreenplayScriptTypes.EQUALS, SEPARATOR);
         ATTRIBUTES.put(GettingScreenplayScriptTypes.HYPHEN, SEPARATOR);
+        ATTRIBUTES.put(GettingScreenplayScriptTypes.COMMA, SEPARATOR);
         ATTRIBUTES.put(GettingScreenplayScriptTypes.VAR_PREFIX, SEPARATOR);
         ATTRIBUTES.put(GettingScreenplayScriptTypes.HASH, SEPARATOR);
         ATTRIBUTES.put(GettingScreenplayScriptTypes.POINT_TO, SEPARATOR);
@@ -83,12 +85,28 @@ public class GettingScreenplayScriptSyntaxHighlighter extends SyntaxHighlighterB
         ATTRIBUTES.put(GettingScreenplayScriptTypes.L_BRACKET, SEPARATOR);
         ATTRIBUTES.put(GettingScreenplayScriptTypes.R_BRACKET, SEPARATOR);
 
+        // 布尔与空
+        ATTRIBUTES.put(GettingScreenplayScriptTypes.TRUE, COMMON_VALUE);
+        ATTRIBUTES.put(GettingScreenplayScriptTypes.FALSE, COMMON_VALUE);
+        ATTRIBUTES.put(GettingScreenplayScriptTypes.NULL, COMMON_VALUE);
+
         // 设置其他 token 的属性
-        ATTRIBUTES.put(GettingScreenplayScriptTypes.STRING, STRING);
+        // 字符串绿
+        ATTRIBUTES.put(GettingScreenplayScriptTypes.DOUBLE_QUOTED_STRING, STRING);
+        ATTRIBUTES.put(GettingScreenplayScriptTypes.SINGLE_QUOTED_STRING, STRING);
+        ATTRIBUTES.put(GettingScreenplayScriptTypes.IDENTIFIER, STRING);
+        // 数字蓝
         ATTRIBUTES.put(GettingScreenplayScriptTypes.NUMBER, NUMBER);
-        ATTRIBUTES.put(GettingScreenplayScriptTypes.ALPHABET, ALPHABET);
         ATTRIBUTES.put(GettingScreenplayScriptTypes.WORD, WORD);
-        ATTRIBUTES.put(GettingScreenplayScriptTypes.COMMENT, COMMENT);
+        // 标识符白
+        ATTRIBUTES.put(GettingScreenplayScriptTypes.ALPHABET, ALPHABET);
+        // 关键字亮橙
+        ATTRIBUTES.put(GettingScreenplayScriptTypes.COMMAND_NAME, COMMAND_NAME);
+        // 变量深绿
+        ATTRIBUTES.put(GettingScreenplayScriptTypes.VARIABLE, VARIABLE);
+        // 注释深灰
+        ATTRIBUTES.put(GettingScreenplayScriptTypes.LINE_COMMENT, COMMENT);
+        ATTRIBUTES.put(GettingScreenplayScriptTypes.BLOCK_COMMENT, COMMENT);
     }
 
     @NotNull
@@ -102,19 +120,4 @@ public class GettingScreenplayScriptSyntaxHighlighter extends SyntaxHighlighterB
     public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
         return pack(ATTRIBUTES.get(tokenType));
     }
-
-    // 定义分隔符集合
-    private static final TokenSet SEPARATORS = TokenSet.create(
-            GettingScreenplayScriptTypes.COLON,
-            GettingScreenplayScriptTypes.SEMICOLON,
-            GettingScreenplayScriptTypes.EQUALS,
-            GettingScreenplayScriptTypes.HYPHEN,
-            GettingScreenplayScriptTypes.VAR_PREFIX,
-            GettingScreenplayScriptTypes.HASH,
-            GettingScreenplayScriptTypes.POINT_TO,
-            GettingScreenplayScriptTypes.L_CURLY,
-            GettingScreenplayScriptTypes.R_CURLY,
-            GettingScreenplayScriptTypes.L_BRACKET,
-            GettingScreenplayScriptTypes.R_BRACKET
-    );
 }

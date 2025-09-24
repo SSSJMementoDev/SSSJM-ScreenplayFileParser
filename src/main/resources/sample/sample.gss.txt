@@ -1,4 +1,7 @@
+// 其中command和subParamKey需要限定为英文字符串
+// Param一类需填入content
 command:mainParam;
+// 哈哈哈
 command : mainParam;
 command:mainParam -subParamKey1=subParamValue1;
 command : mainParam -subParamKey1 = subParamValue1;
@@ -24,6 +27,9 @@ command :
         "testField1":2
     };
 command : "mainParam";
-
-// 其中command和subParamKey需要限定为英文字符串
-// mainParam需是除
+command : 我说，什么意思！！！;
+command : "Hello Gays";
+command : Hi Gays;
+command : 我日你{$Test};
+command : 啊对对对{$Test1} -subParamKey={$Test2} -subParamKey={};
+// 收尾
