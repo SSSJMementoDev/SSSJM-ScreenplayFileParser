@@ -43,7 +43,7 @@
             // Json特供，不好乱动
             IDENTIFIER="testComment"
             // 通用字符
-            WORD="regexp:[^\s:;=\-\"\'\[\]\{\}$#,.-]*"
+            WORD="regexp:[^\s:;=\-\"\'\[\]\{\}$#,.-/]*"
 
             // 注解与空白
             SPACE='regexp:\s+'
@@ -57,48 +57,47 @@
         extends("string_literal|number_literal|boolean_literal|null_literal")=literal
 }
 
-screenplay ::= comment? (comment | screenplayConfig | command)* comment?
+screenplay ::= (comment | screenplayConfig)? (comment | command)* comment?
 
-command ::= commandName COLON? mainParam? subParams? SEMICOLON
+command ::= commandName mainParam? comment? subParams? semicolon
 {
     pin=1
     recoverWhile=cmdRecover
 }
 
-private cmdRecover ::= !(SEMICOLON | ALPHABET | HASH | comment)
+private cmdRecover ::= !(semicolon | alphabet | generalWord | hash | comment)
 
-commandName     ::= ALPHABET
-mainParam       ::= content
+commandName     ::= (alphabet | generalWord)
+mainParam       ::= colon content
 subParams       ::= subParam+
-subParam        ::= (HYPHEN subParamKey) subParamValue? { recoverWhile=param_Recover }
-subParamKey     ::= ALPHABET
-subParamValue   ::= EQUALS (option | content)
-private param_Recover ::= !(SEMICOLON | ALPHABET | HYPHEN | comment)
+subParam        ::= (hyphen subParamKey) subParamValue? { recoverWhile=param_Recover }
+subParamKey     ::= alphabet
+subParamValue   ::= equals (option | content)
+private param_Recover ::= !(semicolon | alphabet | hyphen | comment)
 
-private comment ::= LINE_COMMENT | BLOCK_COMMENT
+private comment ::= line_comment | block_comment
 
 private content ::= (number | word | variable | json)
-private word ::= ( ALPHABET | DOUBLE_QUOTED_STRING | WORD ) variable? ( ALPHABET | DOUBLE_QUOTED_STRING | WORD )?
-private number ::= NUMBER
+private word ::= ( alphabet | double_quoted_string | generalWord ) variable? ( alphabet | double_quoted_string | generalWord )?
 
-screenplayConfig ::= HASH (word | json)? HASH
+screenplayConfig ::= hash (word | json)? hash
 {
     pin=1
     recoverWhile=screenplayConfig_Recover
 }
-private screenplayConfig_Recover ::= !(HASH | ALPHABET | SEMICOLON)
+private screenplayConfig_Recover ::= !(hash | alphabet | semicolon |generalWord)
 
 // [->target]格式
 option ::= optionTarget optionContent
-optionTarget ::= L_BRACKET POINT_TO ALPHABET R_BRACKET
+optionTarget ::= l_bracket point_to alphabet r_bracket
 {
     pin=1
     recoverWhile=optionTarget_Recover
 }
 optionContent ::= word
-private optionTarget_Recover ::= !(L_BRACKET | R_BRACKET | optionContent)
+private optionTarget_Recover ::= !(l_bracket | r_bracket | optionContent)
 
-variable ::= L_CURLY VAR_PREFIX "Base."? ALPHABET R_CURLY
+variable ::= l_curly var_prefix "Base."? alphabet r_curly
 {
     pin=2
 }
@@ -152,3 +151,27 @@ private value ::= object | array | literal | reference_expression
 // Recoveries
 private not_bracket_or_next_value ::= !(']'|value)
 private not_brace_or_next_value ::= !('}'|value)
+
+private hyphen::=HYPHEN
+private equals::=EQUALS
+private semicolon::=SEMICOLON
+private colon::=COLON
+private comma::=COMMA
+private l_curly::=L_CURLY
+private r_curly::=R_CURLY
+private l_bracket::=L_BRACKET
+private r_bracket::=R_BRACKET
+private var_prefix::=VAR_PREFIX
+private hash::=HASH
+private point_to::=POINT_TO
+private double_quoted_string::=DOUBLE_QUOTED_STRING
+private single_quoted_string::=SINGLE_QUOTED_STRING
+private number::=NUMBER
+private true::=TRUE
+private false::=FALSE
+private null::=NULL
+private alphabet::=ALPHABET
+private identifier::=IDENTIFIER
+private generalWord::=WORD
+private line_comment::=LINE_COMMENT
+private block_comment::=BLOCK_COMMENT

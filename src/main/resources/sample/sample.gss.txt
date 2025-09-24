@@ -32,4 +32,5 @@ command : "Hello Gays";
 command : Hi Gays;
 command : 我日你{$Test};
 command : 啊对对对{$Test1} -subParamKey={$Test2} -subParamKey={};
+格兰妮 : 咿呀!!! -subParamKey;
 // 收尾
