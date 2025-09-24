@@ -1,0 +1,42 @@
+// This is a generated file. Not intended for manual editing.
+package cn.monocur.sssjmscreenplayfileparser.screenplay.psi.impl;
+
+import java.util.List;
+import org.jetbrains.annotations.*;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.util.PsiTreeUtil;
+import static cn.monocur.sssjmscreenplayfileparser.screenplay.psi.GettingScreenplayScriptTypes.*;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import cn.monocur.sssjmscreenplayfileparser.screenplay.psi.*;
+
+public class GettingScreenplayScriptScreenplayConfigImpl extends ASTWrapperPsiElement implements GettingScreenplayScriptScreenplayConfig {
+
+  public GettingScreenplayScriptScreenplayConfigImpl(@NotNull ASTNode node) {
+    super(node);
+  }
+
+  public void accept(@NotNull GettingScreenplayScriptVisitor visitor) {
+    visitor.visitScreenplayConfig(this);
+  }
+
+  @Override
+  public void accept(@NotNull PsiElementVisitor visitor) {
+    if (visitor instanceof GettingScreenplayScriptVisitor) accept((GettingScreenplayScriptVisitor)visitor);
+    else super.accept(visitor);
+  }
+
+  @Override
+  @Nullable
+  public GettingScreenplayScriptJson getJson() {
+    return findChildByClass(GettingScreenplayScriptJson.class);
+  }
+
+  @Override
+  @Nullable
+  public GettingScreenplayScriptVariable getVariable() {
+    return findChildByClass(GettingScreenplayScriptVariable.class);
+  }
+
+}
