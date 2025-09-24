@@ -1,5 +1,6 @@
 package cn.monocur.sssjmscreenplayfileparser.screenplay;
 
+import cn.monocur.sssjmscreenplayfileparser.GettingScreenplayScriptFileParserBundle;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.colors.AttributesDescriptor;
@@ -99,6 +100,6 @@ public class GettingScreenplayScriptColorSettingsPage implements ColorSettingsPa
     @NotNull
     @Override
     public String getDisplayName() {
-        return "Getting Screenplay Script";
+        return GettingScreenplayScriptFileParserBundle.message("filetype.displayname");
     }
 }

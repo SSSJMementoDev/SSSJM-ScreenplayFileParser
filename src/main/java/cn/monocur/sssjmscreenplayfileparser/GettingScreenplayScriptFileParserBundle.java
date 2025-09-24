@@ -4,12 +4,12 @@ import com.intellij.DynamicBundle;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.PropertyKey;
 
-public class SPFileParserBundle extends DynamicBundle {
+public class GettingScreenplayScriptFileParserBundle extends DynamicBundle {
     @NonNls
     private static final String BUNDLE = "messages.SPFileParserBundle";
-    private static final SPFileParserBundle INSTANCE = new SPFileParserBundle();
+    private static final GettingScreenplayScriptFileParserBundle INSTANCE = new GettingScreenplayScriptFileParserBundle();
 
-    private SPFileParserBundle() {
+    private GettingScreenplayScriptFileParserBundle() {
         super(BUNDLE);
     }
 

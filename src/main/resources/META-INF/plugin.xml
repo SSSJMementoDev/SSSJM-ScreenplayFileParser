@@ -9,14 +9,6 @@
     <resource-bundle>messages.SPFileParserBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <projectService
-                serviceInterface="cn.monocur.sssjmscreenplayfileparser.services.SPFileParserProjectService"
-                serviceImplementation="cn.monocur.sssjmscreenplayfileparser.services.SPFileParserProjectService"
-        />
-        <toolWindow
-                factoryClass="cn.monocur.sssjmscreenplayfileparser.toolWindow.SPFileParserToolWindowFactory"
-                id="ScreenplayFileParser"
-        />
         <fileType
                 name="GettingScreenplayScript"
                 language="GettingScreenplayScript"
@@ -43,5 +35,10 @@
                 language="GettingScreenplayScript"
                 implementationClass="cn.monocur.sssjmscreenplayfileparser.screenplay.psi.GettingScreenplayScriptParserDefinition"
         />
+        <completion.contributor
+            language="GettingScreenplayScript"
+            implementationClass="cn.monocur.sssjmscreenplayfileparser.screenplay.GettingScreenplayScriptCompletionContributor"
+        />
+
     </extensions>
 </idea-plugin>

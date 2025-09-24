@@ -1,6 +1,6 @@
 package cn.monocur.sssjmscreenplayfileparser.screenplay;
 
-import cn.monocur.sssjmscreenplayfileparser.SPFileParserBundle;
+import cn.monocur.sssjmscreenplayfileparser.GettingScreenplayScriptFileParserBundle;
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.util.NlsContexts;
@@ -31,13 +31,13 @@ public class GettingScreenplayScriptFileType extends LanguageFileType {
 
     @Override
     public @NlsContexts.Label @NotNull String getDescription() {
-        return SPFileParserBundle.message("filetype.description");
+        return GettingScreenplayScriptFileParserBundle.message("filetype.description");
     }
 
     @Override
     public @NotNull String getDisplayName() {
         // 正确：从资源包返回本地化的显示名称
-        return SPFileParserBundle.message("filetype.displayname");
+        return GettingScreenplayScriptFileParserBundle.message("filetype.displayname");
     }
 
     @Override
