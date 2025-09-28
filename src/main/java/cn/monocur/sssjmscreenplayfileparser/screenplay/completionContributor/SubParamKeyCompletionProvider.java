@@ -107,15 +107,9 @@ class SubParamKeyCompletionProvider extends CompletionProvider<CompletionParamet
                             GLOBAL
                     );
                     break;
-                case SET_ANIMATION:
+                case SET_ANIMATION, SET_TRANSFORM:
                     registerSuggestions(result,
                             TARGET
-                    );
-                    break;
-                case SET_TRANSFORM:
-                    registerSuggestions(result,
-                            TARGET,
-                            DURATION
                     );
                     break;
                 case GEN_OBJECT:
@@ -126,7 +120,6 @@ class SubParamKeyCompletionProvider extends CompletionProvider<CompletionParamet
                 default:
                     // 为未知命令添加通用参数
                     addGeneralParamSuggestions(result);
-                    System.out.println(commandName);
                     break;
             }
         }
@@ -141,7 +134,8 @@ class SubParamKeyCompletionProvider extends CompletionProvider<CompletionParamet
                 NEXT,
                 STATE,
                 WHEN,
-                VOICE
+                VOICE,
+                DURATION
         );
     }
 
