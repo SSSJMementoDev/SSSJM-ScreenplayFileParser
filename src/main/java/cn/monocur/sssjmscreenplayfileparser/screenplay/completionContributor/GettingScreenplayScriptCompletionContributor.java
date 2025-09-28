@@ -30,7 +30,7 @@ public class GettingScreenplayScriptCompletionContributor extends CompletionCont
     // 多媒体相关命令
     public static final String BGM = "BGM";
     public static final String PLAY_SOUND = "PlaySound";
-    public static final String PLAY_VIDEO = "playVideo";
+    public static final String PLAY_VIDEO = "PlayVideo";
     // 图像相关命令
     public static final String CHANGE_BG = "ChangeBG";
     public static final String CHANGE_FIGURE = "ChangeFigure";
@@ -49,7 +49,7 @@ public class GettingScreenplayScriptCompletionContributor extends CompletionCont
     // 次要参数
     // 基本参数
     public static final String CONCAT = "concat";
-    public static final String HINDER = "Hinder";
+    public static final String HINDER = "hinder";
     public static final String NEXT = "next";
     public static final String LEFT = "left";
     public static final String RIGHT = "right";
